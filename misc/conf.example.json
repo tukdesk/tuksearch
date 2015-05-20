@@ -1,0 +1,11 @@
+{
+    "addr": "127.0.0.1:56380",
+    "data_dir": "./tmp",
+    "index_store": {
+        "addr": "127.0.0.1:6380",
+        "db_index": 15
+    },
+    "index_jieba": {
+        "dict_path": "./misc/dict.txt"
+    }
+}
