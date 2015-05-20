@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 func (this *APIService) IndexDoc(indexName, docId string, data []byte) error {
@@ -25,7 +24,6 @@ func (this *APIService) IndexDoc(indexName, docId string, data []byte) error {
 	}
 
 	if err := index.Index(docId, i); err != nil {
-		fmt.Println("err:", err)
 		return err
 	}
 

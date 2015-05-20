@@ -1,14 +1,12 @@
 package api
 
 import (
-	"encoding/json"
-
 	"github.com/tukdesk/tuksearch/context"
 
 	"github.com/tukdesk/tuksearch/bleve"
 )
 
-func (this *APIService) Query(indexName string, args context.QueryArgs) ([]byte, error) {
+func (this *APIService) Query(indexName string, args context.QueryArgs) (*bleve.SearchResult, error) {
 	if indexName == "" {
 		return nil, errIndexNameRequired
 	}
@@ -23,10 +21,5 @@ func (this *APIService) Query(indexName string, args context.QueryArgs) ([]byte,
 		search.Highlight = bleve.NewHighlight()
 	}
 
-	res, err := index.Search(search)
-	if err != nil {
-		return nil, err
-	}
-
-	return json.Marshal(res)
+	return index.Search(search)
 }

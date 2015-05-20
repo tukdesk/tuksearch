@@ -61,10 +61,9 @@ func New(cfg Config) (*App, error) {
 		return nil, err
 	}
 
-	// init index
-
 	// apis
 	global := api.Global{}
+	global.IndexMetaPath = "index"
 	global.DefaultIndexMapping = defaultIndexMapping
 	global.IndexStoreClient = client
 

@@ -54,8 +54,10 @@ func main() {
 
 	for i, query := range queries {
 		log.Println(i, query.Keyword)
-		res, err := c.QueryResult(indexName, query)
-		log.Println(i, "err:", err)
+		res, err := c.Query(indexName, query)
 		log.Println(i, "res:", res)
+		if err != nil {
+			log.Println(i, "err:", err)
+		}
 	}
 }
