@@ -1,9 +1,8 @@
 package client
 
 import (
-	"github.com/tukdesk/tuksearch/context"
-
 	"github.com/tukdesk/tuksearch/bleve"
+	"github.com/tukdesk/tuksearch/context"
 )
 
 type stub struct {

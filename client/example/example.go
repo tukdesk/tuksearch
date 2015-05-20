@@ -1,12 +1,21 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 
 	"github.com/tukdesk/tuksearch/client"
 	"github.com/tukdesk/tuksearch/context"
 )
+
+type Doc struct {
+	Title    string
+	SubField SubField
+}
+
+type SubField struct {
+	Content string
+	Tags    []string
+}
 
 func main() {
 	c, err := client.New("http://127.0.0.1:56380")
@@ -24,14 +33,17 @@ func main() {
 		"tags":  []string{"d", "b", "爱情保卫战", "e"},
 	}
 
+	doc3 := Doc{}
+	doc3.Title = "this is doc 3"
+	doc3.SubField.Content = "我们需要一个靠谱的网络供应商"
+	doc3.SubField.Tags = []string{"3", "2", "1", "sdk"}
+
 	indexName := "index_test"
 
-	b1, _ := json.Marshal(doc1)
-	b2, _ := json.Marshal(doc2)
-
-	log.Println(c.IndexDoc(indexName, "docId1", b1))
-	log.Println(c.IndexDoc(indexName, "docId2", b2))
-	log.Println(c.DeleteDoc(indexName, "docId3"))
+	log.Println(c.IndexDoc(indexName, "docId1", doc1))
+	log.Println(c.IndexDoc(indexName, "docId2", doc2))
+	log.Println(c.IndexDoc(indexName, "docId3", doc3))
+	log.Println(c.DeleteDoc(indexName, "docId4"))
 
 	queries := []context.QueryArgs{
 		context.QueryArgs{
@@ -44,6 +56,14 @@ func main() {
 		},
 		context.QueryArgs{
 			Keyword:   "保卫",
+			Highlight: true,
+		},
+		context.QueryArgs{
+			Keyword:   "我们",
+			Highlight: true,
+		},
+		context.QueryArgs{
+			Keyword:   "sdk",
 			Highlight: true,
 		},
 		context.QueryArgs{
