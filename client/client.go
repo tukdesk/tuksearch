@@ -1,8 +1,6 @@
 package client
 
 import (
-	"encoding/json"
-
 	"github.com/tukdesk/tuksearch/bleve"
 	"github.com/tukdesk/tuksearch/context"
 
@@ -24,7 +22,7 @@ func New(url string) (*Client, error) {
 }
 
 func (this *Client) IndexDoc(indexName, docId string, doc interface{}) error {
-	b, err := json.Marshal(doc)
+	b, err := context.Marshal(doc)
 	if err != nil {
 		return err
 	}

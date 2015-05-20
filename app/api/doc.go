@@ -1,7 +1,7 @@
 package api
 
 import (
-	"encoding/json"
+	"github.com/tukdesk/tuksearch/context"
 )
 
 func (this *APIService) IndexDoc(indexName, docId string, data []byte) error {
@@ -54,5 +54,5 @@ func (this *APIService) DeleteDoc(indexName, docId string) error {
 
 func docFromBytes(data []byte) (interface{}, error) {
 	var i interface{}
-	return i, json.Unmarshal(data, &i)
+	return i, context.Unmarshal(data, &i)
 }
