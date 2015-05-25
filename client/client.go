@@ -14,7 +14,7 @@ type Client struct {
 func New(url string) (*Client, error) {
 	client := hprose.NewHttpClient(url)
 	s := &stub{}
-	client.(*hprose.HttpClient).DebugEnabled = true
+	client.DebugEnabled = true
 	client.UseService(s)
 	return &Client{
 		stub: s,
